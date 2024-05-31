@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./components/first-component.js"></script>
+    <script defer src="./components/todo-item.js"></script>
+    <script defer src="./components/todo-item2.js"></script>
+    <script defer src="./components/todo-checkbox.js"></script>
+    <script defer src="./components/todo-checkbox2.js"></script>
+    <script defer src="./components/person-component.js"></script>
+    <script defer src="./components/accordion-component.js"></script>
+
+    <title>Web Components</title>
+</head>
+
+<body>
+    <first-component></first-component>
+    <ul>
+        <todo-item>Custom todo item component</todo-item>
+        <li>Great OG li item</li>
+        <todo-item-2>custom todo item component</todo-item-2>
+        <todo-checkbox data-labelText="Personal task">Water the plants
+            <slot name="helper-text" style="color:brown; font-size: 0.8rem;">tomorrow</slot>
+        </todo-checkbox>
+        <todo-checkbox data-labelText="Another task">Drink water (no)
+            <small slot="helper-text" style="color:brown; font-size: 0.8rem;">today</small>
+        </todo-checkbox>
+    </ul>
+    <person-component name="Lara"></person-component>
+        <person-component name="Luiza"></person-component>
+        <todo-checkbox-2 label="My Label" checked>Yet another checkbox</todo-checkbox-2>
+        <todo-checkbox-2 label="Now My Label" checked="false">and another one</todo-checkbox-2>
+        <ul is="accordion-component">
+            <li>#1</li>
+            <li>#2</li>
+            <li>#3</li>
+            <li>#4</li>
+        </ul>
+</body>
+
+</html>

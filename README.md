@@ -10,7 +10,7 @@ For times you don't need a full fledged framework but want a little more flexibi
 
 3. Use the `customElements` registry do define a new web component passing it the name of the web component as the first paramenter and the web component itself as the second parameter
 
-> The name of the web component should have at least one hifen (-) to denote clearly that it is a custom component, not a native HTML tag.
+> The name of the web component should have at least one hifen (-) to denote clearly that it is a custom component, not a native HTML tag and cannot start with an x (x-button).
 
 ```javascript
 class FirstComponent extends HTMLElement {
@@ -77,7 +77,7 @@ class TodoItem extends HTMLElement {
 customElements.define("todo-item", TodoItem)
 ```
 
-Not saying you <b>should</b> use a `<style>` tag inside a custom component but now it shouldn't impact the rest of the HTML. The component is a closed off environment and "self contained"
+Not saying you <b>should</b> use a `<style>` tag inside a custom component but you can, and now it shouldn't interfere the rest of the HTML. The component is a closed off environment and "self-contained"
 
 6. We can also write them by templating the component
 
@@ -100,7 +100,7 @@ class TodoItem2 extends HTMLElement {
     constructor() {
         super()
         const shadowDom = this.attachShadow({ mode: 'open' })
-        // we'll use the clone method to make sure if we reuse the component it will in fact create a new one, not just redeclre it (Attention on step #8 for another possible pitfall while reusing web components)
+        // we'll use the clone method passing true to copy all its descendants to make sure if we reuse the component it will in fact create a new one, not just redeclre it (Attention on step #8 for another possible pitfall while reusing web components)
         shadowDom.append(template.content.clone(true))
     }
 }
@@ -225,7 +225,7 @@ Now the HTML should show two different results for the `name` attribute
 <!-- Outputs: Hi, I'm Luiza -->
 ```
 
-9. We can handle attribute changes with the `attributeChangedCallback` HTMLElement callback
+9. We can handle attribute changes with the `attributeChangedCallback` HTMLElement callback, that is called when an attribute is added, removed, updated or replaced.
 
 ```javascript
 class TodoCheckbox2 extends HTMLElement {
@@ -317,4 +317,67 @@ And use them passing their desired, defined behavior
     <li>#3</li>
     <li>#4</li>
 </ul>
+```
+
+11. A different example of a bigger component
+
+```js
+const userCardTemplate = document.createElement("template");
+userCardTemplate.innerHTML = `
+<style>
+button:hover {
+    transform: scale(1.2);
+}
+a {
+    text-decoration: none;
+}
+</style>
+<div style="display: flex; gap: 1rem; align-items: center; margin-block: 1rem; padding-inline: 1.5rem; padding-block: 1.2rem; border: 1px solid #eeeeee; border-radius: 1rem; background-color: #f5f5f5; font-family: monospace; box-shadow: 5px 4px 10px rgba(0,0,0,20%); max-width: 400px;">
+    <div id="profile-image-container">
+        <img style="border-radius: 0.8rem;" alt="user profile image" id="user-image" />
+    </div>
+    <div style="flex-grow: 1">
+        <h3 id="user-name"></h3>
+        <p id="user-job-title" style="font-style: italic; font-size: 0.7rem;"></p>
+    </div>
+    <button title="Go to Github" style="border:none; background-color: transparent; font-size: 1rem; transition: all; transition-duration: 80ms; padding-inline: 0.6rem; padding-block: 0.4rem;"><a id="github-button" nooppener noreferrer target="_blank">↗️</a></button>
+</div>
+`;
+
+class UserCard extends HTMLElement {
+    constructor() {
+        super();
+
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.appendChild(userCardTemplate.content.cloneNode(true));
+    }
+    connectedCallback() {
+        const name = this.getAttribute('name');
+        const jobTitle = this.getAttribute('jobTitle');
+        const githubUser = this.getAttribute('githubUser');
+
+        const nameField = this.shadowRoot.getElementById('user-name');
+        nameField.textContent = name;
+        nameField.title = name
+        const jobTitleField = this.shadowRoot.getElementById('user-job-title');
+        jobTitleField.textContent = jobTitle
+        jobTitleField.title = `Job title: ${jobTitle}`
+        const githubProfileImage = this.shadowRoot.getElementById('user-image');
+        githubProfileImage.src = `https://github.com/${githubUser}.png?size=100`;
+        githubProfileImage.title = `${name}'s profile picture`
+
+        const goToGithubButton = this.shadowRoot.getElementById("github-button")
+        goToGithubButton.href = `https://github.com/${githubUser}`
+    }
+}
+
+customElements.define("user-card", UserCard);
+```
+
+And on the HTML
+
+```html
+<user-card name="Pedro Menezes" jobTitle="Sr. Water drinker" githubUser="pdrmenezes" style="display:block; max-width: 500px;"></user-card>
+<user-card name="Theo" jobTitle="Sr. Shirt wearer" githubUser="t3dotgg" style="display:block; max-width: 500px;"></user-card>
+<user-card name="The Primeagen" jobTitle="Sr. Teej friend" githubUser="theprimeagen" style="display:block; max-width: 500px;"></user-card>
 ```

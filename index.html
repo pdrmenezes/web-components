@@ -11,6 +11,7 @@
     <script defer src="./components/todo-checkbox2.js"></script>
     <script defer src="./components/person-component.js"></script>
     <script defer src="./components/accordion-component.js"></script>
+    <script defer src="./components/user-card.js"></script>
 
     <title>Web Components</title>
 </head>
@@ -29,15 +30,26 @@
         </todo-checkbox>
     </ul>
     <person-component name="Lara"></person-component>
-        <person-component name="Luiza"></person-component>
-        <todo-checkbox-2 label="My Label" checked>Yet another checkbox</todo-checkbox-2>
-        <todo-checkbox-2 label="Now My Label" checked="false">and another one</todo-checkbox-2>
-        <ul is="accordion-component">
-            <li>#1</li>
-            <li>#2</li>
-            <li>#3</li>
-            <li>#4</li>
-        </ul>
+    <person-component name="Luiza"></person-component>
+    <todo-checkbox-2 label="My Label" checked>Yet another checkbox</todo-checkbox-2>
+    <todo-checkbox-2 label="Now My Label" checked="false">and another one</todo-checkbox-2>
+
+    <div>
+        <user-card name="Pedro Menezes" jobTitle="Sr. Water drinker" githubUser="pdrmenezes"
+            style="display:block; max-width: 500px;"></user-card>
+        <user-card name="Theo" jobTitle="Sr. Shirt wearer" githubUser="t3dotgg"
+            style="display:block; max-width: 500px;"></user-card>
+        <user-card name="The Primeagen" jobTitle="Sr. Teej friend" githubUser="theprimeagen"
+            style="display:block; max-width: 500px;"></user-card>
+    </div>
+
+    <ul is="accordion-component">
+        <li>#1</li>
+        <li>#2</li>
+        <li>#3</li>
+        <li>#4</li>
+    </ul>
+
 </body>
 
 </html>

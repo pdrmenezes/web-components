@@ -16,7 +16,7 @@ a {
         <h3 id="user-name"></h3>
         <p id="user-job-title" style="font-style: italic; font-size: 0.7rem;"></p>
     </div>
-    <button title="Go to Github" style="border:none; background-color: transparent; font-size: 1rem; transition: all; transition-duration: 80ms; padding-inline: 0.6rem; padding-block: 0.4rem;"><a id="github-button" nooppener noreferrer target="_blank">↗️</a></button>
+    <button title="Go to Github" style="border:none; background-color: transparent; font-size: 1rem; transition: all; transition-duration: 80ms; padding-inline: 0.6rem; padding-block: 0.4rem;"><a id="github-button" nooppener noreferrer target="_blank"><slot name="button-icon"></slot></a></button>
 </div>
 `;
 

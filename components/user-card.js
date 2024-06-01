@@ -8,11 +8,11 @@ a {
     text-decoration: none;
 }
 </style>
-<div style="display: flex; gap: 1rem; align-items: center; margin-block: 1rem; padding-inline: 1.5rem; padding-block: 1.2rem; border: 1px solid #eeeeee; border-radius: 1rem; background-color: #f5f5f5; font-family: monospace; box-shadow: 5px 4px 10px rgba(0,0,0,20%); max-width: 400px;">
+<div style="display: flex; gap: 1rem; align-items: center; padding-inline: 1.3rem; padding-block: 1.2rem; border: 1px solid #eeeeee; border-radius: 1rem; background-color: #f5f5f5; font-family: monospace; box-shadow: 2px 3px 8px rgba(230,230,230,15%);">
     <div id="profile-image-container">
         <img style="border-radius: 0.8rem;" alt="user profile image" id="user-image" />
     </div>
-    <div style="flex-grow: 1">
+    <div style="flex-grow: 1; color: #222">
         <h3 id="user-name"></h3>
         <p id="user-job-title" style="font-style: italic; font-size: 0.7rem;"></p>
     </div>
